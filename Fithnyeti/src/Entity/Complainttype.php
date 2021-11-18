@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ComplainttypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +22,13 @@ class Complainttype
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 50,
+     *      minMessage = "The type must be at least {{ limit }} characters long",
+     *      maxMessage = "The type cannot be longer than {{ limit }} characters"
+     * )
      */
     private $type;
 
