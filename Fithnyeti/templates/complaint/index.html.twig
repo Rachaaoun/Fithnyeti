@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseadmin.html.twig' %}
 
-{% block title %}Complaint index{% endblock %}
+{% block title %}Complaint {% endblock %}
 
 {% block body %}
-    <h1>Complaint index</h1>
+    <h1>Complaint </h1>
 
     <table class="table">
         <thead>
@@ -36,4 +36,7 @@
     </table>
 
     <a href="{{ path('complaint_new') }}">Create new</a>
+     <a href="{{ path('complainttype_index') }}" target="_blank"
+                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Go to complaint's type</a>
+      
 {% endblock %}

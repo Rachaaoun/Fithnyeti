@@ -16,6 +16,34 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ComplaintController extends AbstractController
 {
+
+
+
+        /**
+     * @Route("/newforuser", name="complaint_new_user", methods={"GET", "POST"})
+     */
+    public function newComplaint(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $complaint = new Complaint();
+        $form = $this->createForm(ComplaintType::class, $complaint);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($complaint);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('complaint_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('complaint/newFront.html.twig', [
+            'complaint' => $complaint,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+
     /**
      * @Route("/", name="complaint_index", methods={"GET"})
      */
